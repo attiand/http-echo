@@ -1,12 +1,11 @@
 # http-echo
 
-Simple server image that list information about the request in the response body. *Note* that header name case is changed to canonical format.
+Simple server image that list information about the request in the response body. Currently only header information. *Note* that header names are in canonical case.
 
-## Build
+# Run
 
-`podman build . --tag http-echo`
+`docker run -it --rm -p 8080:8080 ghcr.io/attiand/http-echo:latest`
 
-## Run
+## Optional env variables
 
-`podman run -it --rm -p 8080:8080 http-echo`
-
+- NAME: Specify a server name added to the response body
