@@ -1,29 +1,39 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
 )
+
+type Body struct {
+	Name    string  `json:"name"`
+	Request Request `json:"request"`
+}
+
+type Request struct {
+	Path   string              `json:"path"`
+	Method string              `json:"method"`
+	Header map[string][]string `json:"headers"`
+}
 
 func name() string {
 	return os.Getenv("NAME")
 }
 
 func info(w http.ResponseWriter, req *http.Request) {
-	serverName := name()
+	w.Header().Set("Content-Type", "application/json")
 
-	if len(serverName) > 0 {
-		fmt.Fprintf(w, "Server: %v\n\n", serverName)
-	}
+	body := Body{
+		Name: name(),
+		Request: Request{
+			Path:   req.URL.Path,
+			Method: req.Method,
+			Header: req.Header,
+		}}
 
-	fmt.Fprintf(w, "Headers:\n")
-
-	for name, headers := range req.Header {
-		for _, v := range headers {
-			fmt.Fprintf(w, "   %v: %v\n", name, v)
-		}
-	}
+	json.NewEncoder(w).Encode(body)
 }
 
 func main() {
