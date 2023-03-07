@@ -1,6 +1,6 @@
 # http-echo
 
-Simple server image that list information about the request in the response body. Note* that header names are in canonical case.
+Simple server image that list information about the request in the response body. *Note* that header names are in canonical case.
 
 # Run
 
@@ -10,6 +10,6 @@ Simple server image that list information about the request in the response body
 
 `curl http://localhost:8080`
 
-## Optional env variables
+## Optional environment variables
 
-- NAME: Specify a server name added to the response body
+- NAME - Specify a server name added to the response body

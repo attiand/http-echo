@@ -13,7 +13,7 @@ type Body struct {
 }
 
 type Request struct {
-	Path   string              `json:"path"`
+	Url    string              `json:"url"`
 	Method string              `json:"method"`
 	Header map[string][]string `json:"headers"`
 }
@@ -28,7 +28,7 @@ func info(w http.ResponseWriter, req *http.Request) {
 	body := Body{
 		Name: name(),
 		Request: Request{
-			Path:   req.URL.Path,
+			Url:    req.URL.String(),
 			Method: req.Method,
 			Header: req.Header,
 		}}
