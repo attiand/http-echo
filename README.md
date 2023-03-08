@@ -8,7 +8,24 @@ Simple server image that list information about the request in the response body
 
 ## Test
 
-`curl http://localhost:8080`
+`curl http://localhost:8080 | jq .`
+```json
+{
+  "name": "server1",
+  "request": {
+    "url": "/",
+    "method": "GET",
+    "headers": {
+      "Accept": [
+        "*/*"
+      ],
+      "User-Agent": [
+        "curl/7.76.1"
+      ]
+    }
+  }
+}
+```
 
 ## Optional environment variables
 
