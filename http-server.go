@@ -36,8 +36,17 @@ func info(w http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(w).Encode(body)
 }
 
+func setCookie(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("Set cookies:", req.URL.Query())
+
+	for k, v := range req.URL.Query() {
+		http.SetCookie(w, &http.Cookie{Name: k, Value: v[0]})
+	}
+}
+
 func main() {
 	http.HandleFunc("/", info)
+	http.HandleFunc("/setcookie", setCookie)
 
 	fmt.Println("start", name())
 	http.ListenAndServe(":8080", nil)
